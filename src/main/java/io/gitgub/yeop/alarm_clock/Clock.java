@@ -5,21 +5,27 @@ import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public record Clock() {
+public class Clock extends Thread {
     private static final int FIX_SECOND = 1_000;
+    private static final int FIX_DELAY = 1_000;
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("H:mm:ss");
 
-    public void start(TimeConsumer consumer) {
+    @Override
+    public void run() {
         Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                LocalDateTime localDateTime = LocalDateTime.now();
-                String now = localDateTime.format(DATE_TIME_FORMATTER);
-                consumer.consumeTime(now);
-            }
-        };
+        timer.scheduleAtFixedRate(new PrintTimeTask(), FIX_DELAY, FIX_SECOND);
+    }
 
-        timer.scheduleAtFixedRate(task, 0, FIX_SECOND);
+    public static Time start(TimeConsumer consumer) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        String now = localDateTime.format(DATE_TIME_FORMATTER);
+        return consumer.consumeTime(now);
+    }
+
+    private static class PrintTimeTask extends TimerTask {
+        @Override
+        public void run() {
+            System.out.println("현재시간: %s".formatted(Clock.start(Time::new)));
+        }
     }
 }
