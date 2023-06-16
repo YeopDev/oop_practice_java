@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class AlaramRunner {
     public static void main(String[] args) {
         Clock clock = new Clock();
-        clock.start(currentTime -> System.out.println("현재시간: " + currentTime));
-
         Alarms alarms = new Alarms();
 
-        Scanner scanner = new Scanner(System.in);
+        clock.start();
 
-        Time time = new Time(scanner.nextLine());
+        Scanner scanner = new Scanner(System.in);
+        alarms.add(new Time(scanner.nextLine()));
+        alarms.start();
     }
 }
