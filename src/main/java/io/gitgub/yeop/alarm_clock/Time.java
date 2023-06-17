@@ -26,7 +26,7 @@ public record Time(String now) {
         try {
             LocalTime.parse(now, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new IllegalStateException("입력시간 형식이 H:mm:ss가 아닙니다. (현재 값 %s)".formatted(now), dateTimeParseException);
+            throw new IllegalStateException("입력시간 형식이 H:mm:ss가 아닙니다. (현재 값 %s)".formatted(now));
         }
     }
 }
