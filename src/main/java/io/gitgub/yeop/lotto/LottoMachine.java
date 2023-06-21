@@ -14,13 +14,16 @@ public class LottoMachine {
         Buy buy = new Buy();
 
         output.printBuyAmountMessage();
-        int purchaseAmount = input.buyAmount();
+        try{
+            int purchaseAmount = input.buyAmount();
+            int buyFewSheets = purchaseAmount / ONE_SHEET_PRICE;
+            output.printBuyConfirmationMessage(buyFewSheets);
 
-        int buyFewSheets = purchaseAmount / ONE_SHEET_PRICE;
-        output.printBuyConfirmationMessage(buyFewSheets);
-
-        for(int i = 0; i < buyFewSheets; i++){
-            buy.add(new Lotto(CreateLottoNumbers.AUTO.create(MINIMUM_SIZE_NUMBERS)));
+            for(int i = 0; i < buyFewSheets; i++){
+                buy.add(new Lotto(CreateLottoNumbers.AUTO.create(MINIMUM_SIZE_NUMBERS)));
+            }
+        }catch (IllegalArgumentException msg){
+            System.out.println(msg.getMessage());
         }
 
         output.printLottoNumbers(buy);
