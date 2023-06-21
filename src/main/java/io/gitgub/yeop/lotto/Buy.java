@@ -19,7 +19,7 @@ public class Buy {
 
     public String stringValue() {
         return results.stream()
-                .map(Lotto::numbers)
+                .map(String::valueOf)
                 .collect(joining(lineSeparator()));
     }
 }
