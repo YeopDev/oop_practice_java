@@ -1,8 +1,8 @@
-package io.gitgub.yeop.lotto.console;
+package io.gitgub.yeop.lotto;
 
-import io.gitgub.yeop.lotto.Buy;
+import io.gitgub.yeop.lotto.console.ConsoleInput;
+import io.gitgub.yeop.lotto.console.ConsoleOutput;
 import io.gitgub.yeop.lotto.create.CreateLottoNumbers;
-import io.gitgub.yeop.lotto.Lotto;
 
 public class LottoMachine {
     private static final int MINIMUM_SIZE_NUMBERS = 6;
@@ -22,6 +22,7 @@ public class LottoMachine {
         for(int i = 0; i < buyFewSheets; i++){
             buy.add(new Lotto(CreateLottoNumbers.AUTO.create(MINIMUM_SIZE_NUMBERS)));
         }
+
         output.printLottoNumbers(buy);
     }
 }
