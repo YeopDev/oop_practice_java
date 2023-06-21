@@ -7,3 +7,12 @@
 out
 gen
 .gradle
+*.class
+*.css
+*.xml
+*.html
+*.MF
+*.idx
+*.bin
+*.jar
+*.js
