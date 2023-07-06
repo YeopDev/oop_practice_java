@@ -7,6 +7,11 @@ public record Person(String name) {
         validate(name);
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     private void validate(String name) {
         if (name.isEmpty() || name.length() > MINIMUM_SIZE) {
             throw new IllegalArgumentException("사람 이름은 최대 %d 글자 입니다. (현재 값 %d)".formatted(MINIMUM_SIZE, name.length()));
